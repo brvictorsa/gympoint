@@ -1,10 +1,9 @@
 # Gympoint
 Projeto Gympoint de certificação GoStack - Dezembro de 2019
 
-* Backend
+1. Backend
 
-* Frontend
+2. Frontend
 
-* Mobile
-
+3. Mobile
 O projeto mobile foi desenvolvido para ser executado apenas em Android.
