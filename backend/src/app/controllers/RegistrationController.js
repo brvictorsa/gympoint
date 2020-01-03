@@ -5,6 +5,8 @@ import Plan from '../models/Plan';
 import Registration from '../models/Registration';
 import Student from '../models/Student';
 
+import Mail from '../../lib/Mail';
+
 // valida os dados de entrada
 const validateInputData = async dataToValidate => {
   const schema = Yup.object().shape({
@@ -110,7 +112,12 @@ class RegistrationController {
         .json({ message: 'Já existe uma matrícula para este aluno.' });
     }
 
-    // calcula a data de término e preço total
+    // calcula a data de término e preço total// envia e-mail de matrícula
+    await Mail.sendMail({
+      to: `${student.name} <${student.email}>`,
+      subject: 'Gympoint - Matrícula',
+      text: 'Você acabou de se matricular na Gympoint.',
+    });
     const { start_date: strDate } = req.body;
     const start_date = Date.parse(strDate);
     const end_date = addMonths(start_date, plan.duration);
@@ -125,7 +132,12 @@ class RegistrationController {
       total_price,
     });
 
-    // envia e-mail de matrícula ...
+    // envia e-mail de matrícula
+    await Mail.sendMail({
+      to: `${student.name} <${student.email}>`,
+      subject: 'Gympoint - Matrícula',
+      text: 'Você acabou de se matricular na Gympoint.',
+    });
 
     return res.json(registration);
   }
@@ -164,8 +176,6 @@ class RegistrationController {
       end_date,
       total_price,
     });
-
-    // envia e-mail de atualização de plano/matrícula ...
 
     return res.json('update');
   }

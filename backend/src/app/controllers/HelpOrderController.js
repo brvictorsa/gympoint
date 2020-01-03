@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import HelpOrder from '../models/HelpOrder';
 import Student from '../models/Student';
 
+import Mail from '../../lib/Mail';
+
 class HelpOrderController {
   // listar pedidos de auxílio de um aluno
   async index(req, res) {
@@ -108,7 +110,7 @@ class HelpOrderController {
         {
           model: Student,
           as: 'student',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'email'],
         },
       ],
     });
@@ -125,7 +127,14 @@ class HelpOrderController {
       answer_at: answerDate,
     });
 
-    return res.json('update');
+    //envia um e-mail de resposta do pedido de auxílio
+    await Mail.sendMail({
+      to: `${helpOrder.student.name} <${helpOrder.student.email}>`,
+      subject: 'Gympoint Responde',
+      text: 'O seu pedido de auxílio foi respondido pela equipe da Gympoint. Não perca tempo, entre no app e veja a nossa resposta.',
+    });
+
+    return res.json('update: pedido de auxílio respondido');
   }
 }
 
