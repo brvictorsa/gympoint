@@ -13,7 +13,7 @@ export default function RouterWrapper({
   isPrivate,
   ...rest
 }) {
-  const { signed } = false;// store.getState().auth;
+  const { signed } = store.getState().auth;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
