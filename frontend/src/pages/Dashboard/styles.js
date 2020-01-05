@@ -48,6 +48,9 @@ export const PanelCard = styled(Link)`
 
 export const PanelInfo = styled.div`
   color: #ee4d64;
+  div {
+    text-align: center;
+  }
   span {
     margin-bottom: 5px;
     font-size: 24px;

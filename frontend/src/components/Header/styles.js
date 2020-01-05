@@ -26,7 +26,7 @@ export const Content = styled.div`
     a {
       font-weight: bold;
       color:#999999;
-      margin-left: 12px;
+      margin-right: 15px;
     }
     /* active color: #444444 */
   }
