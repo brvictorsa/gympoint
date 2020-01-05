@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { Container, Title, GridCard, Card } from './styles';
+import { Container, Title, Panel, PanelCard, PanelInfo } from './styles';
 
 export default function Dashboard() {
   return (
@@ -8,15 +7,32 @@ export default function Dashboard() {
       <Title>
         <h2>Dashboard</h2>
       </Title>
-      <GridCard>
-        <Card>
-          <img src="" alt="" />
-          <span>Alunos</span>
-        </Card>
-        <Card> Matrículas </Card>
-        <Card> Planos </Card>
-        <Card> Pedidos de Auxílio </Card>
-      </GridCard>
+      <Panel>
+        <PanelCard to="/students">
+          <PanelInfo>
+            <span>Alunos</span>
+            <small>(25)</small>
+          </PanelInfo>
+        </PanelCard>
+        <PanelCard to="/plans">
+        <PanelInfo>
+            <span>Planos</span>
+            <small>(3)</small>
+          </PanelInfo>
+        </PanelCard>
+        <PanelCard to="/enrollments">
+        <PanelInfo>
+            <span>Matrículas</span>
+            <small>(7)</small>
+          </PanelInfo>
+        </PanelCard>
+        <PanelCard to="/help-orders">
+          <PanelInfo>
+            <span>Pedidos de Auxílio</span>
+            <small>(8)</small>
+          </PanelInfo>
+        </PanelCard>
+      </Panel>
     </Container>
   );
 }
