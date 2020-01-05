@@ -20,7 +20,7 @@ export default function Header() {
         </nav>
         <Profile>
           <div>
-            <strong>Victor Santos</strong>
+            <strong>Adminstrador</strong>
             <Link to="/">sair do sistema</Link>
           </div>
         </Profile>
