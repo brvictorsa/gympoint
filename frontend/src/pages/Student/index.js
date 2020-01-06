@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container } from './styles';
 
-export default function Students() {
+export default function Student() {
   return (
     <Container>
       <div>Alunos</div>

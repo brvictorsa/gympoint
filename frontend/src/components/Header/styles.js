@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import Button from '../../components/Button';
+
+
 export const Container = styled.div`
   background: #fff;
   padding: 0 30px;
@@ -37,7 +40,6 @@ export const Profile = styled.div`
 
   div {
     text-align: right;
-    margin-right: 10px;
     strong {
       display: block;
       color: #444444;
@@ -49,3 +51,5 @@ export const Profile = styled.div`
     color: #de3b3b;
   }
 `;
+
+export const LogoutButton = styled(Button)``;

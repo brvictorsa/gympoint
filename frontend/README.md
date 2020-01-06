@@ -8,3 +8,11 @@ Gympoint Frontend
 ### Dashboard
 
 ![Dashboard](https://github.com/brvictorsa/gympoint/blob/master/frontend/src/assets/screenshots/dashboard-page.png)
+
+### Alunos
+
+### Planos
+
+### Matrículas
+
+### Pedidos de Auxílio
