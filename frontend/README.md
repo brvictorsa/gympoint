@@ -11,6 +11,10 @@ Gympoint Frontend
 
 ### Alunos
 
+1. Lista de Planos
+
+![Lista](https://github.com/brvictorsa/gympoint/blob/master/frontend/src/assets/screenshots/lista-de-alunos.png)
+
 ### Planos
 
 1. Lista de Planos
