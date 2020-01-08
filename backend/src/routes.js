@@ -2,9 +2,10 @@ import { Router } from 'express';
 
 import AnswerHelpOrderController from './app/controllers/AnswerHelpOrderController';
 import CheckinController from './app/controllers/CheckinController';
+import DashboardController from './app/controllers/DashboardController';
+import EnrollmentController from './app/controllers/EnrollmentController';
 import HelpOrderController from './app/controllers/HelpOrderController';
 import PlanController from './app/controllers/PlanController';
-import EnrollmentController from './app/controllers/EnrollmentController';
 import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 
@@ -22,6 +23,9 @@ routes
 routes.post('/students/:id/help-orders', HelpOrderController.store);
 
 routes.use(authMiddleware);
+
+routes
+  .get('/dashboard', DashboardController.index);
 
 routes
   .get('/students', StudentController.index)
