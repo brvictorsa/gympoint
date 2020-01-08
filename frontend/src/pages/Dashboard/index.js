@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { MdAssignment, MdAttachMoney, MdHelpOutline, MdPerson } from 'react-icons/md';
-
 import { Container, Title, Panel, PanelCard, PanelInfo } from './styles';
 
+import api from '../../services/api';
+
 export default function Dashboard() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function loadDashboardData() {
+      const response = await api.get('dashboard');
+
+      setData(response.data);
+    }
+
+    loadDashboardData();
+  }, []);
+
   return (
     <Container>
       <Title>
@@ -17,7 +30,7 @@ export default function Dashboard() {
               <MdPerson size={72} color="#f17083"/>
             </div>
             <span>Alunos</span>
-            <small>(25)</small>
+            <small>({data.students})</small>
           </PanelInfo>
         </PanelCard>
         <PanelCard to="/plan">
@@ -26,7 +39,7 @@ export default function Dashboard() {
               <MdAttachMoney size={72} color="#f17083"/>
             </div>
             <span>Planos</span>
-            <small>(3)</small>
+            <small>({data.plans})</small>
           </PanelInfo>
         </PanelCard>
         <PanelCard to="/enrollment">
@@ -35,7 +48,7 @@ export default function Dashboard() {
               <MdAssignment size={72} color="#f17083"/>
             </div>
             <span>Matrículas</span>
-            <small>(7)</small>
+            <small>({data.enrollments})</small>
           </PanelInfo>
         </PanelCard>
         <PanelCard to="/helpOrder">
@@ -44,7 +57,7 @@ export default function Dashboard() {
               <MdHelpOutline size={72} color="#f17083"/>
             </div>
             <span>Pedidos de Auxílio</span>
-            <small>(8)</small>
+            <small>({data.helpOrders})</small>
           </PanelInfo>
         </PanelCard>
       </Panel>
