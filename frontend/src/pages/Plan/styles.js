@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-//import ActionLink from '~/components/ActionLink';
 
 export const Container = styled.div`
   color: #444444;

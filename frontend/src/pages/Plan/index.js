@@ -22,7 +22,7 @@ export default function Plan() {
       return {
         id: count,
         title: item.title,
-        duration: item.duration === 1 ? `${item.duration} mês` : `${item.duration} meses`,
+        duration: `${item.duration} ${item.duration === 1 ? 'mês' : 'meses'}`,
         price: formattedPrice(item.monthly_price),
       }
     });

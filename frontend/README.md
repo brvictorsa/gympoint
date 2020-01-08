@@ -13,6 +13,10 @@ Gympoint Frontend
 
 ### Planos
 
+1. Lista de Planos
+
+![Lista](https://github.com/brvictorsa/gympoint/blob/master/frontend/src/assets/screenshots/lista-de-planos.png)
+
 ### Matrículas
 
 ### Pedidos de Auxílio
