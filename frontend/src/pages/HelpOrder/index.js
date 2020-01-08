@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaPlus, FaSyncAlt } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 
 import api from '../../services/api';
 
