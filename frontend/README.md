@@ -11,7 +11,7 @@ Gympoint Frontend
 
 ### Alunos
 
-1. Lista de Planos
+1. Lista de Alunos
 
 ![Lista](https://github.com/brvictorsa/gympoint/blob/master/frontend/src/assets/screenshots/lista-de-alunos.png)
 
@@ -22,5 +22,9 @@ Gympoint Frontend
 ![Lista](https://github.com/brvictorsa/gympoint/blob/master/frontend/src/assets/screenshots/lista-de-planos.png)
 
 ### Matrículas
+
+1. Lista de Matrículas
+
+![Lista](https://github.com/brvictorsa/gympoint/blob/master/frontend/src/assets/screenshots/lista-de-matriculas.png)
 
 ### Pedidos de Auxílio

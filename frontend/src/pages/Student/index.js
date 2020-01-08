@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MdAdd } from 'react-icons/md';
+import { FaPlus } from 'react-icons/fa';
 
 import api from '../../services/api';
 
@@ -26,7 +26,7 @@ export default function Student() {
       <PageInfo>
         <span>Gerenciando Alunos</span>
         <Link to="/dashboard">
-            <MdAdd size={22} color="#FFF"/>
+            <FaPlus size={16} color="#FFF"/>
             Cadastrar
         </Link>
       </PageInfo>

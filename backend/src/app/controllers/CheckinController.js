@@ -48,7 +48,7 @@ class CheckinController {
     if (count > 4) {
       return res.status(400).json({
         error:
-          'O aluno já atingiu o limite de 5 checkins nos  últimos 7 dias. Tente novamente amanhã.',
+          'O aluno já atingiu o limite de 5 checkins nos últimos 7 dias. Tente novamente amanhã.',
       });
     }
 
