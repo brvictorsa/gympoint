@@ -10,6 +10,7 @@ import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 
 import validateStudentStore from './app/validators/StudentStore';
+import validatePlanStoreUpdate from './app/validators/PlanStoreUpdate';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -38,8 +39,8 @@ routes.put('/students/:id/help-orders', HelpOrderController.update);
 
 routes
   .get('/plans', PlanController.index)
-  .post('/plans', PlanController.store)
-  .put('/plans/:id', PlanController.update)
+  .post('/plans', validatePlanStoreUpdate, PlanController.store)
+  .put('/plans/:id', validatePlanStoreUpdate, PlanController.update)
   .delete('/plans/:id', PlanController.delete);
 
 routes

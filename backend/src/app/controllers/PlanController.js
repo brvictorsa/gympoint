@@ -1,34 +1,7 @@
 import { Op } from 'sequelize';
-import * as Yup from 'yup';
 
 import Plan from '../models/Plan';
 import Enrollment from '../models/Enrollment';
-
-// valida os dados de entrada
-const validateInputData = async dataToValidate => {
-  const schema = Yup.object().shape({
-    title: Yup.string()
-      .max(50, 'O título do plano pode ter no máximo 50 caracteres.')
-      .required(),
-    duration: Yup.number()
-      .moreThan(0, 'A duranção deve ser um número positivo e maior que zero.')
-      .required('Duração em meses obrigatória.'),
-    monthly_price: Yup.number()
-      .min(0, 'O preço mensal deve ser um valor positivo.')
-      .required('Preço mensal obrigatório'),
-  });
-
-  let validateMessage = null;
-
-  if (!(await schema.isValid(dataToValidate))) {
-    // eslint-disable-next-line func-names
-    await schema.validate(dataToValidate).catch(function(err) {
-      validateMessage = err.errors;
-    });
-  }
-
-  return validateMessage;
-};
 
 class PlanController {
   async index(req, res) {
@@ -45,15 +18,6 @@ class PlanController {
   }
 
   async store(req, res) {
-    // validação dos dados
-    const validateMessage = await validateInputData(req.body);
-
-    if (validateMessage) {
-      return res
-        .status(400)
-        .json({ error: `A validação falhou: ${validateMessage}` });
-    }
-
     const { title } = req.body;
 
     // verifica se já existe um plano com o mesmo título
@@ -77,15 +41,6 @@ class PlanController {
   }
 
   async update(req, res) {
-    // validação dos dados
-    const validateMessage = await validateInputData(req.body);
-
-    if (validateMessage) {
-      return res
-        .status(400)
-        .json({ error: `A validação falhou: ${validateMessage}` });
-    }
-
     // recupera o plano
     const { id } = req.params;
     const { title } = req.body;
