@@ -9,10 +9,12 @@ import PlanController from './app/controllers/PlanController';
 import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 
-import validateStudentStore from './app/validators/StudentStore';
-import validatePlanStoreUpdate from './app/validators/PlanStoreUpdate';
+import validateEnrollmentStore from './app/validators/EnrollmentStore';
+import validateEnrollmentUpdate from './app/validators/EnrollmentUpdate';
 import validateHelpOrderStore from './app/validators/HelpOrderStore';
 import validateHelpOrderUpdate from './app/validators/HelpOrderUpdate';
+import validatePlanStoreUpdate from './app/validators/PlanStoreUpdate';
+import validateStudentStore from './app/validators/StudentStore';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -47,8 +49,8 @@ routes
 
 routes
   .get('/enrollments', EnrollmentController.index)
-  .post('/enrollments', EnrollmentController.store)
-  .put('/enrollments/:id', EnrollmentController.update)
+  .post('/enrollments', validateEnrollmentStore, EnrollmentController.store)
+  .put('/enrollments/:id', validateEnrollmentUpdate, EnrollmentController.update)
   .delete('/enrollments/:id', EnrollmentController.delete);
 
 routes.get('/answer/help-orders', AnswerHelpOrderController.index);

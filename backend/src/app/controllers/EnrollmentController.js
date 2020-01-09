@@ -1,55 +1,10 @@
 import { addMonths } from 'date-fns';
-import * as Yup from 'yup';
 
 import Plan from '../models/Plan';
 import Enrollment from '../models/Enrollment';
 import Student from '../models/Student';
 
 import Mail from '../../lib/Mail';
-
-// valida os dados de entrada
-const validateInputData = async dataToValidate => {
-  const schema = Yup.object().shape({
-    student_id: Yup.number()
-      .moreThan(0, 'Identificador do aluno inválido.')
-      .required('Aluno obrigatório.'),
-    plan_id: Yup.number()
-      .moreThan(0, 'Identificador do plano inválido.')
-      .required('Plano obrigatório.'),
-    start_date: Yup.date().required('Data de início obrigatória'),
-  });
-
-  let validateMessage = null;
-
-  if (!(await schema.isValid(dataToValidate))) {
-    // eslint-disable-next-line func-names
-    await schema.validate(dataToValidate).catch(function(err) {
-      validateMessage = err.errors;
-    });
-  }
-
-  return validateMessage;
-};
-
-const validateInputDataUpdate = async dataToValidate => {
-  const schema = Yup.object().shape({
-    plan_id: Yup.number()
-      .moreThan(0, 'Identificador do plano inválido.')
-      .required('Plano obrigatório.'),
-    start_date: Yup.date().required('Data de início obrigatória.'),
-  });
-
-  let validateUpdateMessage = null;
-
-  if (!(await schema.isValid(dataToValidate))) {
-    // eslint-disable-next-line func-names
-    await schema.validate(dataToValidate).catch(function(err) {
-      validateUpdateMessage = err.errors;
-    });
-  }
-
-  return validateUpdateMessage;
-};
 
 class EnrollmentController {
   async index(req, res) {
@@ -78,15 +33,6 @@ class EnrollmentController {
   }
 
   async store(req, res) {
-    // validação dos dados
-    const validateMessage = await validateInputData(req.body);
-
-    if (validateMessage) {
-      return res
-        .status(400)
-        .json({ error: `A validação falhou: ${validateMessage}` });
-    }
-
     // valida se o aluno e o plano existem
     const { student_id, plan_id } = req.body;
     const student = await Student.findByPk(student_id);
@@ -141,15 +87,6 @@ class EnrollmentController {
   }
 
   async update(req, res) {
-    // validação dos dados
-    const validateMessage = await validateInputDataUpdate(req.body);
-
-    if (validateMessage) {
-      return res
-        .status(400)
-        .json({ error: `A validação falhou: ${validateMessage}` });
-    }
-
     // valida se o plano existe
     const { plan_id } = req.body;
     const plan = await Plan.findByPk(plan_id);
