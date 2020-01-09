@@ -11,6 +11,8 @@ import StudentController from './app/controllers/StudentController';
 
 import validateStudentStore from './app/validators/StudentStore';
 import validatePlanStoreUpdate from './app/validators/PlanStoreUpdate';
+import validateHelpOrderStore from './app/validators/HelpOrderStore';
+import validateHelpOrderUpdate from './app/validators/HelpOrderUpdate';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -23,7 +25,7 @@ routes
   .post('/students/:id/checkins', CheckinController.store)
   .get('/students/:id/help-orders', HelpOrderController.index);
 
-routes.post('/students/:id/help-orders', HelpOrderController.store);
+routes.post('/students/:id/help-orders', validateHelpOrderStore, HelpOrderController.store);
 
 routes.use(authMiddleware);
 
@@ -35,7 +37,7 @@ routes
   .post('/students', validateStudentStore, StudentController.store)
   .put('/students/:id', StudentController.update);
 
-routes.put('/students/:id/help-orders', HelpOrderController.update);
+routes.put('/students/:id/help-orders', validateHelpOrderUpdate, HelpOrderController.update);
 
 routes
   .get('/plans', PlanController.index)

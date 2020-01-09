@@ -41,25 +41,6 @@ class HelpOrderController {
 
   // cadastro de pedidos de auxílio
   async store(req, res) {
-    // validação dos dados
-    const schema = Yup.object().shape({
-      question: Yup.string()
-        .max(255, 'A pergunta pode ter no máximo 255 caracteres.')
-        .required('A pergunta não pode ser vazia.'),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      let validationMessage = '';
-      // eslint-disable-next-line func-names
-      await schema.validate(req.body).catch(function(err) {
-        validationMessage = err.errors;
-      });
-
-      return res
-        .status(400)
-        .json({ error: `A validação falhou: ${validationMessage}` });
-    }
-
     // recupera os dados
     const { id: student_id } = req.params;
     const { question } = req.body;
@@ -79,25 +60,6 @@ class HelpOrderController {
 
   // cadastro da resposta do pedido de auxílio
   async update(req, res) {
-    // validação dos dados
-    const schema = Yup.object().shape({
-      answer: Yup.string()
-        .max(255, 'A resposta pode ter no máximo 255 caracteres.')
-        .required('A resposta não pode ser vazia.'),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      let validationMessage = '';
-      // eslint-disable-next-line func-names
-      await schema.validate(req.body).catch(function(err) {
-        validationMessage = err.errors;
-      });
-
-      return res
-        .status(400)
-        .json({ error: `A validação falhou: ${validationMessage}` });
-    }
-
     // recupera os dados
     const { id } = req.params;
     const { answer } = req.body;
