@@ -9,6 +9,8 @@ import PlanController from './app/controllers/PlanController';
 import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 
+import validateStudentStore from './app/validators/StudentStore';
+
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -29,7 +31,7 @@ routes
 
 routes
   .get('/students', StudentController.index)
-  .post('/students', StudentController.store)
+  .post('/students', validateStudentStore, StudentController.store)
   .put('/students/:id', StudentController.update);
 
 routes.put('/students/:id/help-orders', HelpOrderController.update);

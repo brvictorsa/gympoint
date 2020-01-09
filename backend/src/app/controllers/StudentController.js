@@ -1,37 +1,6 @@
 import { Op } from 'sequelize';
-import * as Yup from 'yup';
 
 import Student from '../models/Student';
-
-// valida os dados de entrada
-const validateInputData = async dataToValidate => {
-  const schema = Yup.object().shape({
-    name: Yup.string().required('Nome obrigatório.'),
-    email: Yup.string('E-mail brigatório.')
-      .email()
-      .required(),
-    age: Yup.number()
-      .moreThan(12, 'O aluno deve ter pelo menos 13 anos de idade.')
-      .required(),
-    weight: Yup.number()
-      .moreThan(45, 'O aluno deve pesar pelo menos 45Kg.')
-      .required('Peso obrigatório.'),
-    height: Yup.number()
-      .moreThan(0, 'Altura inválida.')
-      .required('Altura obrigatória'),
-  });
-
-  let validateMessage = null;
-
-  if (!(await schema.isValid(dataToValidate))) {
-    // eslint-disable-next-line func-names
-    await schema.validate(dataToValidate).catch(function(err) {
-      validateMessage = err.errors;
-    });
-  }
-
-  return validateMessage;
-};
 
 class StudentController {
   async index(req, res) {
@@ -53,15 +22,6 @@ class StudentController {
   }
 
   async store(req, res) {
-    // validação dos dados
-    const validateMessage = await validateInputData(req.body);
-
-    if (validateMessage) {
-      return res
-        .status(400)
-        .json({ error: `A validação falhou: ${validateMessage}` });
-    }
-
     const { email } = req.body;
 
     // verifica se já existe outro usuário com o e-mail
@@ -87,15 +47,6 @@ class StudentController {
   }
 
   async update(req, res) {
-    // validação dos dados
-    const validateMessage = await validateInputData(req.body);
-
-    if (validateMessage) {
-      return res
-        .status(400)
-        .json({ error: `A validação falhou: ${validateMessage}` });
-    }
-
     // recupera o aluno
     const { id } = req.params.id;
     const { email } = req.body;
