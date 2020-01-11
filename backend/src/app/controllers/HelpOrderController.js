@@ -1,11 +1,11 @@
-import * as Yup from 'yup';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import HelpOrder from '../models/HelpOrder';
 import Student from '../models/Student';
 
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import AnswerHelpOrderMail from '../jobs/AnswerHelpOrderMail';
 
 class HelpOrderController {
   // listar pedidos de auxílio de um aluno
@@ -100,15 +100,8 @@ class HelpOrderController {
     });
 
     // envia um e-mail de resposta do pedido de auxílio
-    await Mail.sendMail({
-      to: `${helpOrder.student.name} <${helpOrder.student.email}>`,
-      subject: 'Gympoint Responde',
-      template: 'helporder',
-      context: {
-        name: helpOrder.student.name,
-        date: answerDateFormmatted,
-        hour: answerHourFormmatted,
-      },
+    await Queue.add(AnswerHelpOrderMail.key, {
+      helpOrder, answerDateFormmatted, answerHourFormmatted
     });
 
     return res.json('update: pedido de auxílio respondido');

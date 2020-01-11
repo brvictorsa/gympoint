@@ -4,7 +4,8 @@ import Plan from '../models/Plan';
 import Enrollment from '../models/Enrollment';
 import Student from '../models/Student';
 
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import EnrollmentMail from '../jobs/EnrollmentMail';
 
 class EnrollmentController {
   async index(req, res) {
@@ -74,13 +75,8 @@ class EnrollmentController {
     });
 
     // envia e-mail de matrícula
-    await Mail.sendMail({
-      to: `${student.name} <${student.email}>`,
-      subject: 'Gympoint - Registro de Matrícula',
-      template: 'enrollment',
-      context: {
-        name: student.name,
-      },
+    await Queue.add(EnrollmentMail.key, {
+      student,
     });
 
     return res.json(enrollment);
